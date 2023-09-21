@@ -6,7 +6,9 @@ class Db {
     const DB_USER = 'admin';
     const DB_PASSWORD = '123456';
 
-    private PDO $conn;
+    private ?PDO $conn;
+
+    public static ?Db $db = null;
 
     public function __construct() {
         $this->conn = new PDO(
@@ -15,6 +17,40 @@ class Db {
             self::DB_PASSWORD
         );
     }
-}
 
-var_dump(new Db());
+    public function query(string $sql, array $params = []): PDOStatement {
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    }
+
+    /**
+     * Ejecuta una consulta y retorna true si se afectaron filas
+     */
+    public function exec(string $sql, array $params = []): bool
+    {
+        return $this->query($sql, $params)
+            ->rowCount() > 0;
+    }
+
+    /**
+     * Get driver
+     */
+    public function get(): PDO {
+        return $this->conn;
+    }
+
+    /**
+     * Cierra la conexion
+     */
+    public function close() {
+        $this->conn = null;
+    }
+
+    public static function getInstance(): Db {
+        if (self::$db === null) {
+            self::$db = new Db;
+        }
+        return self::$db;
+    }
+}

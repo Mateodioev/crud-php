@@ -2,7 +2,7 @@
 
 session_start();
 
-$isLogged = $_SESSION["loggedin"] ?? false;
+$isLogged = (bool) ($_SESSION["loggedin"] ?? false);
 $title = $isLogged ? "Bienvenido " . ($_SESSION['username'] ?? '') : "Inicia session";
 
 ?>

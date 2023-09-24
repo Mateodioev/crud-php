@@ -1,5 +1,7 @@
 FROM php:8.0.27-apache
 
+WORKDIR /var/www/html
+
 RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libzip-dev \
@@ -11,7 +13,7 @@ RUN a2enmod rewrite
 # Installation de Composer
 # COPY --from=composer:2.6 /usr/bin/composer /usr/local/bin/composer
 
-WORKDIR /var/www/html
+# Copy source files
 COPY . /var/www/html/
 
 # RUN composer install --no-dev --optimize-autoloader --no-interaction

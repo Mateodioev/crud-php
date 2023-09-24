@@ -6,7 +6,7 @@ setcookie(session_name(), '', time() - 86400, '/');
 
 session_destroy();
 
-header("location: index.php");
+header("location: index");
 exit;
 
 ?>

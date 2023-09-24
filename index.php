@@ -1,9 +1,28 @@
 <?php
+require __DIR__ . '/src/functions.php';
 
 session_start();
 
-$isLogged = (bool) ($_SESSION["loggedin"] ?? false);
+$isLogged = isLogged();
 $title = $isLogged ? "Bienvenido " . ($_SESSION['username'] ?? '') : "Inicia session";
+$error = '';
+
+if (isMethod('POST') && ($_POST['action'] ?? '') === 'login') {
+    $user = $_POST['username'];
+    $pass = $_POST['password'];
+    $result = database()->query('SELECT * FROM usuarios WHERE correo = ? OR username = ?', [$user, $user])->fetch(PDO::FETCH_ASSOC);
+
+    $password = $result['password'] ?? null;
+    $exists = $password !== null && matchPasswords($pass, $password);
+
+    if ($exists) {
+        $_SESSION['loggedin'] = true;
+        $_SESSION['username'] = $result['username'];
+        redirect('index.php');
+    } else {
+        $error = 'Usuario o contraseña incorrectos';
+    }
+}
 
 ?>
 
@@ -15,26 +34,28 @@ $title = $isLogged ? "Bienvenido " . ($_SESSION['username'] ?? '') : "Inicia ses
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/main.css">
-    <?php if ($isLogged === false): ?> <link rel="stylesheet" href="static/css/login.css"><?php endif; ?>
+    <?php if ($isLogged === false): ?> <link rel="stylesheet" href="static/css/login.css"><?php endif;?>
     <title><?php echo $title; ?></title>
 </head>
 
 <body>
-
     <?php if ($isLogged === false): ?>
     <div class="login-card">
         <h2>Inicia session</h2>
         <h3>Ingresa tu contraseña</h3>
 
-        <form action="api.php" method="POST" class="login-form">
+        <form action="index" method="POST" class="login-form">
             <input type="hidden" name="action" value="login">
             <input id="username" name="username" type="text" placeholder="Usuario" required autocomplete="username">
             <input id="password" name="password" type="password" placeholder="Contraseña" required>
             <a href="resetpassword.php">Olvidaste tu contraseña?</a>
+            <?php if (empty($error) === false): ?>
+                <div class="modal-error"><?php echo $error; ?></div>
+            <?php endif; ?>
             <input type="submit" value="Ingresar" id="form-submit">
-            <p>No tienes una cuenta? <a href="signup.php">Registrate</a></p>
+            <p>No tienes una cuenta? <a href="signup">Registrate</a></p>
         </form>
     </div>
-    <?php endif; ?>
+    <?php endif;?>
 </body>
 </html>

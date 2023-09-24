@@ -24,6 +24,11 @@ class Db {
         return $stmt;
     }
 
+    public function fetch(string $sql, array $params = [], int $mode = PDO::FETCH_ASSOC): mixed
+    {
+        return $this->query($sql, $params)->fetch($mode);
+    }
+
     /**
      * Ejecuta una consulta y retorna true si se afectaron filas
      */

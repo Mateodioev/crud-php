@@ -3,8 +3,7 @@ require __DIR__ . '/src/functions.php';
 session_start();
 
 if (isLogged()) {
-    header("location: index");
-    exit;
+    redirect($_GET['redirect'] ?? 'index');
 }
 
 $error = '';
@@ -20,7 +19,7 @@ if (isMethod('POST') && ($_POST['action'] ?? '') === 'signup') {
         ]);
 
         setLogged($user);
-        redirect('index');
+        redirect($_POST['redirect'] ?? 'index');
     } catch (\Throwable $e) {
         $error = 'Error al crear el usuario';
     }
@@ -46,6 +45,9 @@ if (isMethod('POST') && ($_POST['action'] ?? '') === 'signup') {
 
         <form action="signup" method="POST" class="login-form">
             <input type="hidden" name="action" value="signup">
+            <?php if (isset($_GET['redirect'])):  ?>
+            <input type="hidden" name="redirect" value="<?php echo $_GET['redirect'] ?>">
+            <?php endif; ?>
             <input id="username" name="username" type="text" placeholder="Usuario" required autocomplete="username">
             <input id="email" name="email" type="text" placeholder="Correo" required autocomplete="email">
             <input id="password" name="password" type="password" placeholder="Contraseña" required autocomplete="new-password">

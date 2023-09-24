@@ -7,7 +7,7 @@ require __DIR__ . '/db.php';
  */
 function isLogged(): bool
 {
-    return (bool) ($_SESSION["loggedin"] ?? false);
+    return ($_SESSION["loggedin"] ?? false) && !empty($_SESSION["username"] ?? '');
 }
 
 /**
@@ -55,4 +55,12 @@ function database(): Db
 function setLogged(string $username): void {
     $_SESSION['loggedin'] = true;
     $_SESSION['username'] = $username;
+}
+
+function getUploadPathFile(string $name): string {
+    return 'storage/img/' . randomString() . basename($name);
+}
+
+function randomString(int $length = 10): string {
+    return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, $length);
 }

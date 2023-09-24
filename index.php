@@ -3,8 +3,10 @@ require __DIR__ . '/src/functions.php';
 
 session_start();
 
-$isLogged = isLogged();
-$title = $isLogged ? "Bienvenido " . ($_SESSION['username'] ?? '') : "Inicia session";
+if (isLogged()) {
+    redirect('main');
+}
+
 $error = '';
 
 if (isMethod('POST') && ($_POST['action'] ?? '') === 'login') {
@@ -18,7 +20,7 @@ if (isMethod('POST') && ($_POST['action'] ?? '') === 'login') {
     if ($exists) {
         $_SESSION['loggedin'] = true;
         $_SESSION['username'] = $result['username'];
-        redirect('index.php');
+        redirect('main');
     } else {
         $error = 'Usuario o contraseña incorrectos';
     }
@@ -34,12 +36,11 @@ if (isMethod('POST') && ($_POST['action'] ?? '') === 'login') {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/main.css">
-    <?php if ($isLogged === false): ?> <link rel="stylesheet" href="static/css/login.css"><?php endif;?>
-    <title><?php echo $title; ?></title>
+    <link rel="stylesheet" href="static/css/login.css">
+    <title>Inicia session</title>
 </head>
 
 <body>
-    <?php if ($isLogged === false): ?>
     <div class="login-card">
         <h2>Inicia session</h2>
         <h3>Ingresa tu contraseña</h3>
@@ -56,6 +57,5 @@ if (isMethod('POST') && ($_POST['action'] ?? '') === 'login') {
             <p>No tienes una cuenta? <a href="signup">Registrate</a></p>
         </form>
     </div>
-    <?php endif;?>
 </body>
 </html>

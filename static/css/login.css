@@ -50,6 +50,21 @@
     border: 2px solid #10449A;
 }
 
+.login-form > label {
+    color: rgba(252, 252, 252, 1);
+    font-size: 0.9rem;
+    text-align: left;
+    /* margin-bottom: 6px; */
+}
+
+.login-form > textarea {
+    /* Make semi-transparent */
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
 #form-submit {
     cursor: pointer;
     width: 100%;
@@ -81,12 +96,6 @@
 
 .login-form a:hover{
     color: #63ffc8;
-}
-
-@keyframes rotate{
-    100%{
-        background-position: 15% 50%;
-    }
 }
 
 @media (width >= 500px){

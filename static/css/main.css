@@ -18,6 +18,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     color: #000;
+    background-attachment: fixed;
     animation: rotate 6s infinite alternate linear;
 }
 
@@ -34,4 +35,10 @@ body{
     border-radius: 1rem;
     backdrop-filter: blur(50px);
     box-shadow: 0px 0px 1px 0px #fff;
+}
+
+@keyframes rotate{
+    100%{
+        background-position: 15% 50%;
+    }
 }

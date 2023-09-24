@@ -72,7 +72,7 @@ body{
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 0.4rem;
     line-height: 20px;
-    width: 285px;
+    width: 290px;
     height: 360px;
     overflow: hidden;
     transition: all 0.5s ease;
@@ -94,7 +94,9 @@ body{
     align-items: center;
     justify-content: space-between;
 }
-
+.card-btn {
+    font-size: 0.75em;
+}
 .container .card .card-content .card-btn{
     color: #fff;
     cursor: pointer;

@@ -30,6 +30,6 @@ if (!isLogged()) {
 
     </div>
 
-    <!-- <script src="index.js"></script> -->
+    <script src="static/js/scroll.js"></script>
 </body>
 </html>

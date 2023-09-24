@@ -21,7 +21,7 @@ if (isMethod('POST') && isset($_FILES['gameImage'])) {
                 $_POST['gameDate'],
                 $_POST['gamePrice'],
                 $_POST['gameStock'],
-                $_POST['gameRating'],
+                round($_POST['gameRating'], 2),
                 $imagePath
             ]);
             redirect('addGames');

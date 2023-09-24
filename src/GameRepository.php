@@ -85,7 +85,10 @@ class GameRepository
      */
     public static function bulkToJson(array $games, int $flags = 0): string
     {
-        return json_encode(self::bulkToArray($games), $flags);
+        return json_encode([
+            'games' => self::bulkToArray($games),
+            'total' => count($games)
+        ], $flags);
     }
 
     /**

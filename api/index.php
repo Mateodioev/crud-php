@@ -5,12 +5,12 @@ require __DIR__.'/../src/GameRepository.php';
 
 $router = new BramusRouter;
 
-$router->mount('/games', function () use ($router) {
-    header('Content-Type: application/json');
 
+$router->mount('/games', function () use ($router) {
     $limit = (int) ($_GET['limit'] ?? 10);
     $page  = (int) ($_GET['page'] ?? 0);
     $offset = $limit * ($page - 1);
+    $offset = $offset < 0 ? 0 : $offset;
 
     $router->get('/all', fn () => GameRepository::bulkToJson(GameRepository::allWithLimit($limit, $offset)));
 
@@ -26,11 +26,13 @@ $router->mount('/games', function () use ($router) {
 
 $router->set404('/games(/.*)?', function() {
     header('HTTP/1.1 404 Not Found');
-    header('Content-Type: application/json');
     return json_encode(['error' => 'Not found']);
 });
 
 try {
+    header('Content-Type: application/json');
+    // Cors 
+    header('Access-Control-Allow-Origin: *');
     $router->run();
 } catch (Exception $e) {
     header('Content-Type: application/json', response_code: $e->getCode() ?: 400);

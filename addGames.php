@@ -7,7 +7,7 @@ if (!isLogged()) {
 }
 
 if (isMethod('POST') && isset($_FILES['gameImage'])) {
-    $query     = 'INSERT INTO `juegos` (`nombre`, `descripcion`, `desarrollador`, `categoria`, `lanzamiento`, `precio`, `existencias`, `calificacion`, `imagen`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    $query     = 'INSERT INTO `juegos` (`nombre`, `descripcion`, `desarrollador`, `categoria`, `lanzamiento`, `precio`, `existencias`, `calificacion`, `imagen`, `added_by`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     $archivo   = $_FILES['gameImage'];
     $imagePath = getUploadPathFile($archivo['name']);
 
@@ -22,7 +22,8 @@ if (isMethod('POST') && isset($_FILES['gameImage'])) {
                 $_POST['gamePrice'],
                 $_POST['gameStock'],
                 round($_POST['gameRating'], 2),
-                $imagePath
+                $imagePath,
+                $_SESSION['username']
             ]);
             redirect('addGames');
         } catch (Exception $e) {

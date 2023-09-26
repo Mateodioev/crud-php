@@ -33,7 +33,12 @@ const cargarPeliculas = async () => {
     fetchGames(searchTerm).then(games => {
         if (games.total < 10) {
             isLastPage = true;
-            if (games.total === 0) {return;}
+            if (games.total === 0) {
+                if (pagina === 1) {
+                    document.getElementById('result').innerHTML = 'No se encontraron juegos';
+                }
+                return;
+            }
         }
         games.games.forEach(juego => {
             // recortar el nombre a 16 caracteres

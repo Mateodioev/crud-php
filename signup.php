@@ -43,7 +43,7 @@ if (isMethod('POST') && ($_POST['action'] ?? '') === 'signup') {
     <div class="login-card">
         <h2>Crea tu cuenta</h2>
 
-        <form action="signup" method="POST" class="login-form">
+        <form method="POST" class="login-form">
             <input type="hidden" name="action" value="signup">
             <?php if (isset($_GET['redirect'])):  ?>
             <input type="hidden" name="redirect" value="<?php echo $_GET['redirect'] ?>">

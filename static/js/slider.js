@@ -1,10 +1,10 @@
 const hostname = `${location.protocol}//${location.hostname}:${location.port}`;
-const MAX_CHARS = 20;
+const isPhone = window.innerWidth < 768;
 
 let juegos = '';
 
-async function fetchGames(limit) {
-  const response = await fetch(`${hostname}/api/games/all?limit=${limit}`);
+async function fetchGames(page) {
+  const response = await fetch(`${hostname}/api/games/all?page=${page}`);
   if (response.status !== 200) {
       throw new Error('No se pudo obtener la información');
   }
@@ -15,23 +15,22 @@ async function fetchGames(limit) {
   return data;
 }
 
-async function loadGames() {
-  fetchGames(10).then(data => {
+async function loadGames(page) {
+  fetchGames(page).then(data => {
     data.games.forEach(juego => {
-      const nombre          = juego.nombre;
-      const nombreRecortado = nombre.length > MAX_CHARS ? nombre.substring(0, MAX_CHARS) + '...' : nombre;
-      const ratingColor     = juego.calificacion < 3 ? 'red' : juego.calificacion < 5 ? 'orange' : 'green';
+      const nombre      = juego.nombre;
+      const ratingColor = juego.calificacion < 3 ? 'red' : juego.calificacion < 5 ? 'orange' : 'green';
 
       juegos += `
       <div class="blog-slider__item swiper-slide">
         <div class="blog-slider__img">
           <img
             src="${juego.imagen}"
-            alt="${juego.nombre}">
+            alt="${nombre}">
         </div>
         <div class="blog-slider__content">
           <span class="blog-slider__code" style="color: ${ratingColor};">${juego.calificacion} rating</span>
-          <div class="blog-slider__title">${nombreRecortado}</div>
+          <div class="blog-slider__title">${nombre}</div>
           <div class="blog-slider__text">${juego.descripcion}</div>
           <a href="login" class="blog-slider__button">Comprar por S/.${juego.precio}</a>
         </div>
@@ -43,7 +42,7 @@ async function loadGames() {
   });
 }
 
-const loadingGames = loadGames();
+const loadingGames = loadGames(1);
 
 var swiper = new Swiper('.blog-slider', {
     spaceBetween: 30,

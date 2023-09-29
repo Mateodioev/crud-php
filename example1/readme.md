@@ -1,7 +1,8 @@
 # Installation
-Close source code
+Clone source code
 ```bash
 git clone https://github.com/Mateodioev/crud-php.git
+cd crud-php/example1
 ```
 
 Execute using docker

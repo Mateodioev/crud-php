@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10.6
+    container_name: dbmanager
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+      MARIADB_USER: admin
+      MARIADB_DATABASE: dbsenati
+      MARIADB_PASSWORD: 123456
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/backup.sql:/docker-entrypoint-initdb.d/backup.sql
+  
+  web:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - 3030:80
+
+volumes:
+  db_data:

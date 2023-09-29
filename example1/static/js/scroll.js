@@ -1,7 +1,6 @@
 const form = document.getElementById("search-form");
 const query = document.getElementById("search-input");
 
-const hostname = `${location.protocol}//${location.hostname}:${location.port}`;
 
 let pagina      = 1;
 let juegos      = '';
@@ -87,7 +86,7 @@ const cargarPeliculas = async () => {
 
 async function fetchGames(queryStr) {
     queryStr = queryStr.trim();
-    const response = await fetch(`${hostname}/api/games/search/${queryStr}?page=${pagina}`);
+    const response = await fetch(`api/games/search/${queryStr}?page=${pagina}`);
     if (response.status !== 200) {
         throw new Error('No se pudo obtener la información');
     }

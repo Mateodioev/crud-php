@@ -2,7 +2,7 @@ const hostname = `${location.protocol}//${location.hostname}:${location.port}`;
 let productosStr  = '';
 
 async function fetchGames() {
-    const response = await fetch(`${hostname}/productos`);
+    const response = await fetch(`productos`);
     if (response.status !== 200) {
         throw new Error('No se pudo obtener la información');
     }

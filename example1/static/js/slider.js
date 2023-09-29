@@ -1,10 +1,9 @@
-const hostname = `${location.protocol}//${location.hostname}:${location.port}`;
-const isPhone = window.innerWidth < 768;
+// const hostname = `${location.protocol}//${location.hostname}:${location.port}`;
 
 let juegos = '';
 
 async function fetchGames(page) {
-  const response = await fetch(`${hostname}/api/games/all?page=${page}`);
+  const response = await fetch(`api/games/all?page=${page}`);
   if (response.status !== 200) {
       throw new Error('No se pudo obtener la información');
   }

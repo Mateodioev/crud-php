@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 -- Volcando datos para la tabla entregable01.usuarios: ~0 rows (aproximadamente)
 DELETE FROM `usuarios`;
 INSERT INTO `usuarios` (`dni`, `email`, `password`) VALUES
-	(7777777, 'orehurcomito@gmail.com', '$2y$10$oPhpKIXEsbn.vsa9QpO6meypgVNvgh0FHa13YLXxEabzdSzRz2UIK'); -- mateo
+	(7777777, 'mateodioev@gmail.com', '$2y$10$oPhpKIXEsbn.vsa9QpO6meypgVNvgh0FHa13YLXxEabzdSzRz2UIK'); -- mateo
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

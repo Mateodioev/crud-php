@@ -14,7 +14,7 @@ $router->mount('/games', function () use ($router) {
 
     $router->get('/all', fn () => GameRepository::bulkToJson(GameRepository::allWithLimit($limit, $offset)));
 
-    $router->get('/search(/\w+)?', function (?string $query) use ($limit, $offset): string {
+    $router->get('/search(/.*)?', function (?string $query) use ($limit, $offset): string {
         return GameRepository::bulkToJson(GameRepository::searchWithLimit((string) $query, $limit, $offset));
     });
 

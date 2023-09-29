@@ -1,10 +1,6 @@
 <?php
 
 class Db {
-    const DB_HOST = 'dbmanager';
-    const DB_NAME = 'dbsenati';
-    const DB_USER = 'admin';
-    const DB_PASSWORD = '123456';
 
     private ?PDO $conn;
 
@@ -12,9 +8,9 @@ class Db {
 
     public function __construct() {
         $this->conn = new PDO(
-            'mysql:host=' . self::DB_HOST . ';dbname=' . self::DB_NAME,
-            self::DB_USER,
-            self::DB_PASSWORD
+            'mysql:host=' . $_ENV['DB_HOST'] . ';dbname=' . $_ENV['DB_NAME'],
+            $_ENV['DB_USER'],
+            $_ENV['DB_PASS']
         );
     }
 

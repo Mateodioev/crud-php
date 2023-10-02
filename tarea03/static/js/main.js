@@ -3,9 +3,6 @@ let results = {};
 window.onload = function() {
     // agregar los eventos a cada boton
     document.querySelectorAll('.btn-load').forEach(button => {
-        /* button.addEventListener('click', () => {
-            obtenerValor(button);
-        }); */
 
         // Cambiar el color del boton al pasar el mouse sobre el y mostrar el resultado
         button.addEventListener('mouseover', () => {

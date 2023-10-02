@@ -2,18 +2,16 @@ let results = {};
 
 window.onload = function() {
     // agregar los eventos a cada boton
-    document.querySelectorAll('.btn-load').forEach(button => {
 
-        // Cambiar el color del boton al pasar el mouse sobre el y mostrar el resultado
-        button.addEventListener('mouseover', () => {
-            obtenerValor(button.innerHTML);
-            button.style.backgroundColor = 'green';
-        });
-        // Regresar el color original del boton al quitar el mouse y borrar el resultado
-        button.addEventListener('mouseout', () => {
-            button.removeAttribute('style');
-            document.getElementById('resultado').innerHTML = '';
-        });
+    // el mouse esta sobre el boton
+    $(".btn-load").mouseover(function() {
+        obtenerValor($(this).text());
+        $(this).css("background-color", "#3caed8"); // cambiar el color
+    });
+    // el mouse sale del boton
+    $(".btn-load").mouseout(function() {
+        $("#resultado").html("");
+        $(this).removeAttr("style");
     });
 }
 

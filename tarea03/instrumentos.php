@@ -1,10 +1,9 @@
 <?php
 
-
 $instrumentos = [
     'flauta'   => 'Instrumento de viento',
     'guitarra' => 'Instrumento de cuerda',
-    'bateria'  => 'Instrumento de percusion',
+    'bateria'  => 'Instrumento de percusión',
     'teclado'  => 'Instrumento de tecla',
 ];
 

@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion cuando pasas el documento encima</title>
+    <title>Información cuando pasas el documento encima</title>
     <link rel="stylesheet" href="static/css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
-    <h1>Dar informacion con un evento disparado por el raton</h1>
+    <h1>Dar información con un evento disparado por el mouse</h1>
     <h2>Instrucciones musicales</h2>
 
     <div class="instrumentos-container">
